@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -105,7 +105,16 @@
                 return;
             }
             try {
-                let response = await fetch('http://localhost:3000/bfhl', {
+                // Determine the correct backend URL depending on where this is running
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+                
+                // IMPORTANT: Replace the URL below with your actual deployed Render URL before submitting!
+                // Example: 'https://srm-challenge-api.onrender.com/bfhl'
+                const backendUrl = isLocal 
+                    ? 'http://localhost:3000/bfhl' 
+                    : 'https://bajaj-solution-api.onrender.com/bfhl';
+
+                let response = await fetch(backendUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(bodyData)
