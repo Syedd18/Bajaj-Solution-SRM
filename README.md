@@ -1,29 +1,34 @@
-# SRM Full Stack Engineering Challenge
+# Bajaj SRM - Full Stack Engineering Challenge
 
-Hey! Here is my submission for the Full Stack Challenge. I built this using Node.js & Express for the backend, and standard HTML/CSS/JS for the frontend UI. No massive frameworks, just clean, readable code to get the job done efficiently.
+This is my submission for the SRM engineering challenge. I used Node.js with Express for the backend API, and plain HTML, CSS, and JavaScript for the frontend UI.
 
-### What's included?
-- `backend/server.js`: The Express app containing the API endpoint (`/bfhl`).
-- `frontend/index.html`: A simple, responsive frontend to submit test cases and visualize the JSON payload.
+### Live Demo
 
-### How to Run Locally
+- **Frontend URL:** https://bajaj-solution-pi.vercel.app/
+- **Backend API:** https://bajaj-solution-api.onrender.com 
+*(Note: If you open the backend URL in a browser you will see `Cannot GET /`. This is normal because it only accepts POST requests on the `/bfhl` route.)*
 
-**1. Start the API Server**
-Open up a terminal and maneuver into the backend folder:
+---
+
+### How to run locally
+
+To run the project on your machine:
+
+**1. Start the backend:**
 ```bash
 cd backend
 npm install
 node server.js
 ```
-*Note: The server defaults to port 3000. It's properly set up with CORS so the frontend can hit it without issues.*
+*(The server will start on port 3000).*
 
-**2. Open the Frontend**
-You literally just need to open `frontend/index.html` in your browser. (Double-clicking the file works perfectly).
+**2. Open the frontend:**
+Open the `frontend/index.html` file in your browser. I added the test cases from the PDF as the default input, so you can click "Process Data" to test it quickly.
 
-### Testing the Logic
-The frontend's text area is already pre-filled with the exact test cases from the PDF! Just hit **Process Data** and look at the response below it. 
+---
 
-### A quick note on the logic
-I used a combination of regular expressions for initial string validation, and a recursive topological-style DFS function to construct the nested JSON trees and calculate edge depths. Duplicates are tracked with Sets, and cycles are aggressively handled so we never hit an infinite loop.
+### How the code works
 
-Enjoy! Let me know if you run into any setup snags.
+- **Validation:** The code checks if the input matches the strict `X->Y` format. Invalid strings and duplicate edges are separated into their own lists.
+- **Tree Construction & Cycles:** It builds the tree step-by-step using a basic recursive function. It keeps track of visited nodes to find any cycles and prevent infinite loops.
+- **Summaries:** It counts the nodes in the longest path to find the tree depth. If two trees have the exact same depth, it compares their root letters alphabetically to break the tie.
